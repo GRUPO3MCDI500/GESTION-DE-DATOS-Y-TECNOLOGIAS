@@ -147,11 +147,3 @@ El Notebook incluye:
 7. Cálculo de IMC, categoría de edad y resultado del partido.
 8. Diez consultas mediante Spark SQL.
 9. Filtros, selecciones, ordenamientos y análisis avanzados.
-
-
-## Integrantes
-
-- Eduardo Garrido
-- Luis Espinosa
-- Mauricio Ortega
-- Wilson Arévalo
