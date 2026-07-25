@@ -1,6 +1,6 @@
 # Evaluación Sumativa 2 — Taller I
 
-Repositorio adaptado para la actividad **MCDI502: Gestión de Datos y Tecnologías**. El caso anterior de la Copa Mundial fue reemplazado por el modelo histórico de los Juegos Olímpicos solicitado en la pauta.
+Repositorio completo para **MCDI502: Gestión de Datos y Tecnologías**, adaptado al análisis histórico de los Juegos Olímpicos con Apache Spark.
 
 ## Integrantes
 
@@ -12,7 +12,7 @@ Repositorio adaptado para la actividad **MCDI502: Gestión de Datos y Tecnologí
 ## Estructura
 
 ```text
-GESTION-DE-DATOS-Y-TECNOLOGIAS-adaptado/
+GESTION-DE-DATOS-Y-TECNOLOGIAS-completo/
 ├── .github/workflows/validate.yml
 ├── data/raw/
 │   ├── deportista.csv
@@ -22,73 +22,52 @@ GESTION-DE-DATOS-Y-TECNOLOGIAS-adaptado/
 │   ├── juegos.json
 │   └── resultados.csv
 ├── docs/
-│   ├── analisis_cumplimiento.md
-│   └── guion_video.md
-├── notebooks/
-│   └── mcdi502_s2_g3.ipynb
-├── scripts/
-│   └── validate_repository.py
+│   ├── checklist_entrega.md
+│   ├── guion_video.md
+│   └── orden_ejecucion.md
+├── scripts/validate_repository.py
 ├── .gitignore
+├── mcdi502_s2_g3.ipynb
 ├── README.md
 └── requirements.txt
 ```
 
-## Cobertura de la evaluación
+## Ejecución en Google Colab
 
-El Notebook incluye:
+1. Descargue `mcdi502_s2_g3.ipynb` y el ZIP del repositorio.
+2. En Colab seleccione **Archivo > Subir notebook**.
+3. Ejecute la celda de instalación.
+4. Cuando la celda de carga lo solicite, suba el ZIP completo.
+5. Ejecute las celdas de arriba hacia abajo.
+6. Compruebe que la última validación muestre `Validaciones completadas correctamente`.
 
-1. Instalación de Java y PySpark 4.2.0.
-2. Creación de `SparkSession` y `SparkContext`.
-3. RDD `deportista` con 6 particiones, RDD `deportista2` y unión `deportistaTotal`.
-4. Filtros de mayoría de edad y género femenino, además de conversión a mayúsculas.
-5. DataFrames de deportistas, eventos, equipos, resultados y juegos con esquemas explícitos.
-6. Limpieza de filas irregulares en `evento.csv` y tratamiento de `#N/A` en `resultados.csv`.
-7. Caché, persistencia, Adaptive Query Execution y *broadcast joins*.
-8. Integración de las cinco tablas y reparticionamiento a 5 particiones.
-9. Columnas `IMC` y `Descripción_sexo`.
-10. Agregaciones requeridas mediante Spark SQL.
-11. Validaciones automáticas finales.
+El notebook usa **PySpark 4.0.1** en Colab para mantener compatibilidad con `dataproc-spark-connect`.
 
-## Ejecución
-
-### Google Colab
-
-1. Abra `notebooks/mcdi502_s2_g3.ipynb` en Colab.
-2. Cargue el repositorio o los seis archivos de `data/raw/`.
-3. Ejecute todas las celdas en orden.
-
-El Notebook acepta también los nombres alternativos indicados en la pauta: `eventos.csv`, `equipos.csv`, `resultado.csv` y `juego.json`.
-
-### Local
+## Ejecución local
 
 Requisitos: Python 3.10 o superior y Java 17.
 
 ```bash
 python -m venv .venv
+# Linux/macOS
 source .venv/bin/activate
+# Windows
+# .venv\Scripts\activate
 pip install -r requirements.txt
 jupyter lab
 ```
 
-En Windows, active el entorno con:
-
-```powershell
-.venv\Scripts\activate
-```
-
-## Validación del repositorio
+## Validación estática
 
 ```bash
 python scripts/validate_repository.py
 ```
 
-La validación comprueba archivos, cantidades, esquemas básicos, JSON, estructura del Notebook, nomenclatura y presencia de los puntos obligatorios.
+## Entrega institucional
 
-## Archivos de entrega
-
-La entrega institucional debe contener únicamente:
+El ZIP final de entrega debe contener únicamente:
 
 - `mcdi502_s2_g3.ipynb`
 - `mcdi502_s2_g3_video.mp4`
 
-Ambos se comprimen en un único archivo ZIP. El video no está incluido en este repositorio porque debe ser grabado por el grupo.
+El video debe durar entre 7 y 10 minutos y todos los integrantes deben participar.
