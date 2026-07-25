@@ -1,22 +1,16 @@
-name: Validar repositorio
+name: Validar entrega
 
 on:
   push:
-    branches: ["main", "master"]
   pull_request:
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Descargar repositorio
-        uses: actions/checkout@v4
-
-      - name: Configurar Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Validar estructura y datasets
+      - name: Validar estructura y datos
         run: python scripts/validate_repository.py

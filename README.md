@@ -1,50 +1,31 @@
-# Análisis de datos de la Copa Mundial con Apache Spark
+# Evaluación Sumativa 2 — Taller I
 
-## Información académica
+Repositorio adaptado para la actividad **MCDI502: Gestión de Datos y Tecnologías**. El caso anterior de la Copa Mundial fue reemplazado por el modelo histórico de los Juegos Olímpicos solicitado en la pauta.
 
-- **Asignatura:** 202681.2558 | Gestión de Datos y Tecnologías
-- **Tipo de actividad:** Guía formativa de ejercicios
-- **Tecnología principal:** Apache Spark con PySpark
-- **Entorno de ejecución:** Google Colab
-
-### Integrantes
+## Integrantes
 
 - Eduardo Garrido
 - Luis Espinosa
 - Mauricio Ortega
 - Wilson Arévalo
 
-## Objetivo
-
-Implementar un análisis reproducible que cubra los siguientes aspectos:
-
-- Creación, unión y transformación de RDD.
-- Conversión de RDD a DataFrame con esquema explícito.
-- Integración de múltiples fuentes mediante `join`.
-- Aplicación de caché, persistencia y reparticionamiento.
-- Construcción de columnas calculadas.
-- Desarrollo de consultas analíticas con Spark SQL.
-- Validación de resultados mediante operaciones de inspección.
-
-## Estructura del repositorio
+## Estructura
 
 ```text
-202681-2558-gestion-datos-tecnologias/
-├── .github/
-│   └── workflows/
-│       └── validate.yml
-├── data/
-│   ├── README.md
-│   └── raw/
-│       ├── equipos.csv
-│       ├── estadios.csv
-│       ├── jugadores.csv
-│       ├── partidos.csv
-│       └── torneos.json
+GESTION-DE-DATOS-Y-TECNOLOGIAS-adaptado/
+├── .github/workflows/validate.yml
+├── data/raw/
+│   ├── deportista.csv
+│   ├── deportista2.csv
+│   ├── equipo.csv
+│   ├── evento.csv
+│   ├── juegos.json
+│   └── resultados.csv
 ├── docs/
-│   └── guia_ejercicios_apache_spark.pdf
+│   ├── analisis_cumplimiento.md
+│   └── guion_video.md
 ├── notebooks/
-│   └── 01_analisis_mundial_pyspark.ipynb
+│   └── mcdi502_s2_g3.ipynb
 ├── scripts/
 │   └── validate_repository.py
 ├── .gitignore
@@ -52,98 +33,62 @@ Implementar un análisis reproducible que cubra los siguientes aspectos:
 └── requirements.txt
 ```
 
-## Datos utilizados
+## Cobertura de la evaluación
 
-| Archivo | Formato | Registros |
-|---|---:|---:|
-| `jugadores.csv` | CSV | 80 |
-| `equipos.csv` | CSV | 15 |
-| `partidos.csv` | CSV | 100 |
-| `estadios.csv` | CSV | 10 |
-| `torneos.json` | JSON | 3 |
+El Notebook incluye:
 
-Los archivos originales se conservan en `data/raw/` y no deben modificarse
-directamente.
+1. Instalación de Java y PySpark 4.2.0.
+2. Creación de `SparkSession` y `SparkContext`.
+3. RDD `deportista` con 6 particiones, RDD `deportista2` y unión `deportistaTotal`.
+4. Filtros de mayoría de edad y género femenino, además de conversión a mayúsculas.
+5. DataFrames de deportistas, eventos, equipos, resultados y juegos con esquemas explícitos.
+6. Limpieza de filas irregulares en `evento.csv` y tratamiento de `#N/A` en `resultados.csv`.
+7. Caché, persistencia, Adaptive Query Execution y *broadcast joins*.
+8. Integración de las cinco tablas y reparticionamiento a 5 particiones.
+9. Columnas `IMC` y `Descripción_sexo`.
+10. Agregaciones requeridas mediante Spark SQL.
+11. Validaciones automáticas finales.
 
-## Ejecución en Google Colab
+## Ejecución
 
-1. Abra `notebooks/01_analisis_mundial_pyspark.ipynb` en Google Colab.
-2. Cargue los cinco archivos ubicados en `data/raw/`.
-3. Ejecute las celdas en el orden definido.
-4. Revise los resultados mostrados mediante `.show()`.
+### Google Colab
 
-El Notebook instala Java y PySpark dentro del entorno de Colab.
+1. Abra `notebooks/mcdi502_s2_g3.ipynb` en Colab.
+2. Cargue el repositorio o los seis archivos de `data/raw/`.
+3. Ejecute todas las celdas en orden.
 
-## Ejecución local
+El Notebook acepta también los nombres alternativos indicados en la pauta: `eventos.csv`, `equipos.csv`, `resultado.csv` y `juego.json`.
 
-### Requisitos
+### Local
 
-- Python 3.10 o superior.
-- Java 17.
-- JupyterLab o Jupyter Notebook.
-
-### Instalación
+Requisitos: Python 3.10 o superior y Java 17.
 
 ```bash
 python -m venv .venv
-```
-
-En Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-En Linux o macOS:
-
-```bash
 source .venv/bin/activate
-```
-
-Instale las dependencias:
-
-```bash
 pip install -r requirements.txt
-```
-
-Inicie Jupyter:
-
-```bash
 jupyter lab
 ```
 
-> El Notebook está preparado principalmente para Google Colab. Para una
-> ejecución local, ajuste `BASE_PATH` y omita la celda de carga con
-> `google.colab.files`.
+En Windows, active el entorno con:
+
+```powershell
+.venv\Scripts\activate
+```
 
 ## Validación del repositorio
-
-Ejecute:
 
 ```bash
 python scripts/validate_repository.py
 ```
 
-La validación comprueba:
+La validación comprueba archivos, cantidades, esquemas básicos, JSON, estructura del Notebook, nomenclatura y presencia de los puntos obligatorios.
 
-- Presencia de los archivos obligatorios.
-- Columnas esperadas en los CSV.
-- Cantidad de registros de cada dataset.
-- Estructura del archivo JSON.
-- Validez estructural del Notebook.
+## Archivos de entrega
 
-La misma validación se ejecuta automáticamente mediante GitHub Actions.
+La entrega institucional debe contener únicamente:
 
-## Contenido del análisis
+- `mcdi502_s2_g3.ipynb`
+- `mcdi502_s2_g3_video.mp4`
 
-El Notebook incluye:
-
-1. Configuración de Spark.
-2. Creación y unión de RDD.
-3. Transformaciones sobre RDD.
-4. Construcción e integración de DataFrames.
-5. Persistencia, caché y particionamiento.
-6. Inspección del DataFrame integrado.
-7. Cálculo de IMC, categoría de edad y resultado del partido.
-8. Diez consultas mediante Spark SQL.
-9. Filtros, selecciones, ordenamientos y análisis avanzados.
+Ambos se comprimen en un único archivo ZIP. El video no está incluido en este repositorio porque debe ser grabado por el grupo.
